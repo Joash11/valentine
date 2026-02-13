@@ -3,106 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Journey | 07.01.2016</title>
+    <title>Para Sa Aking Kabiyak</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
     <style>
-        :root { --main-pink: #9d174d; --bg-soft: #fff5f7; }
-        body { background: var(--bg-soft); font-family: 'Palatino', 'Georgia', serif; color: #333; margin: 0; padding: 0; }
-        .container { max-width: 500px; margin: 0 auto; padding: 20px; }
+        :root { --soft-bg: #fffafa; --deep-rose: #a44a4a; --text-muted: #665c5c; }
         
-        /* Login Box */
+        body { 
+            background-color: var(--soft-bg);
+            background-image: url("https://www.transparenttextures.com/patterns/paper.png");
+            font-family: 'EB Garamond', serif; 
+            color: #443e3e; 
+            margin: 0; padding: 0; overflow-x: hidden; 
+        }
+
+        .container { max-width: 450px; margin: 0 auto; padding: 20px; }
+
+        /* Elegant Login */
         #login-screen { height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; }
-        .login-card { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        input { padding: 15px; width: 80%; border: 1px solid #ddd; border-radius: 10px; font-size: 20px; margin-bottom: 20px; text-align: center; outline: none; }
-        button { background: var(--main-pink); color: white; border: none; padding: 15px; border-radius: 10px; width: 100%; cursor: pointer; font-size: 16px; }
+        .login-card { 
+            background: white; padding: 50px 30px; border-radius: 5px; 
+            box-shadow: 0 15px 40px rgba(0,0,0,0.03); border: 1px solid #eee;
+        }
+        h1 { font-family: 'Dancing Script', cursive; color: var(--deep-rose); font-size: 38px; margin-bottom: 5px; }
+        input { 
+            width: 80%; padding: 15px; border: none; border-bottom: 1px solid #ddd;
+            font-size: 20px; margin: 30px 0; text-align: center; outline: none; background: transparent;
+        }
+        .btn-unlock { 
+            background: var(--deep-rose); color: white; border: none; padding: 15px 40px; 
+            cursor: pointer; font-size: 15px; letter-spacing: 2px; text-transform: uppercase; transition: 0.3s;
+        }
 
-        /* Memory Tiles */
-        #journey { display: none; padding: 20px 0; text-align: center; }
-        .instruction { font-style: italic; color: #888; margin-bottom: 30px; animation: pulse 2s infinite; }
+        /* Journey Header */
+        #journey { display: none; text-align: center; padding-top: 40px; animation: fadeIn 2s ease; }
+        .main-title { font-family: 'Dancing Script', cursive; font-size: 45px; color: var(--deep-rose); }
+        .subtitle { font-style: italic; font-size: 18px; color: var(--text-muted); margin-bottom: 50px; }
+
+        /* Polaroids / Memory Cards */
+        .memory-card { 
+            background: white; padding: 15px 15px 40px 15px; border-radius: 2px; margin-bottom: 60px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #efefef;
+            transition: 0.4s; cursor: pointer; transform: rotate(-1deg);
+        }
+        .memory-card:nth-child(even) { transform: rotate(1.5deg); }
+        .memory-card img { width: 100%; display: block; filter: sepia(10%); }
         
-        .memory-tile { background: white; border-radius: 15px; margin-bottom: 25px; overflow: hidden; cursor: pointer; transition: 0.4s; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .memory-tile img { width: 100%; display: block; transition: 0.5s; }
-        .memory-tile.active img { filter: brightness(30%) blur(2px); }
-        
-        .story-overlay { padding: 0; max-height: 0; opacity: 0; transition: all 0.5s ease; font-size: 17px; line-height: 1.6; color: var(--main-pink); background: #fff; }
-        .memory-tile.active .story-overlay { padding: 20px; max-height: 200px; opacity: 1; }
+        .message-box { 
+            max-height: 0; opacity: 0; overflow: hidden; transition: all 0.8s ease;
+            text-align: left;
+        }
+        .memory-card.active .message-box { 
+            max-height: 400px; opacity: 1; padding-top: 25px; 
+        }
+        .message-text { 
+            font-size: 18px; line-height: 1.8; color: #555; font-style: italic;
+            border-top: 1px solid #f5f5f5; padding-top: 20px;
+        }
 
-        /* Apology Section */
-        .apology { background: white; padding: 30px; border-radius: 15px; margin-top: 50px; border-left: 6px solid var(--main-pink); text-align: left; opacity: 0; transform: translateY(20px); transition: 1s; }
-        .apology.visible { opacity: 1; transform: translateY(0); }
+        /* Handwritten Letter */
+        .final-letter { 
+            text-align: left; padding: 50px 20px; margin-top: 30px;
+            border-top: 1px double #ddd;
+        }
+        .final-letter h2 { font-family: 'Dancing Script', cursive; color: var(--deep-rose); font-size: 35px; }
+        .final-letter p { line-height: 2; font-size: 19px; color: #444; }
 
-        @keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
+        /* Floating Rose Petals */
+        .petal { position: fixed; top: -10%; color: #ffccd5; user-select: none; z-index: 1; pointer-events: none; animation: fall linear infinite; opacity: 0.6; }
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); opacity: 0; } }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
 
+<audio id="loveSong" loop>
+    <source src="https://cdn.pixabay.com/audio/2022/05/27/audio_1808f3030e.mp3" type="audio/mpeg">
+</audio>
+
 <div class="container">
     <div id="login-screen">
         <div class="login-card">
-            <h1 style="color: var(--main-pink);">The Love Vault</h1>
-            <p>Enter our date (MMDDYYYY)</p>
+            <h1>The Love Vault</h1>
+            <p style="font-style: italic; color: #888;">Enter our date (MMDDYYYY)</p>
             <input type="text" id="pass" placeholder="07012016" maxlength="8">
-            <button onclick="unlock()">Unlock Memories</button>
+            <button class="btn-unlock" onclick="unlock()">Buksan ang Puso Ko</button>
         </div>
     </div>
 
     <div id="journey">
-        <h1>To My Wife</h1>
-        <p class="instruction">Tap each picture to reveal my heart...</p>
+        <h1 class="main-title">Pano naman tayo?</h1>
+        <p class="subtitle">Ito ang kwento nating dalawa...</p>
 
-        <div class="memory-tile" onclick="this.classList.toggle('active')">
+        <div class="memory-card" onclick="this.classList.toggle('active')">
+            <img src="https://i.postimg.cc/SKXw7jVq/1.jpg">
+            <div class="message-box">
+                <div class="message-text">"Mahal, ito ang pangarap ko... ang bumalik tayo sa dati. 'Yung okay lang tayo, 'yung walang issues. Miss ko na ang kapayapaan nating dalawa. :)"</div>
+            </div>
+        </div>
+
+        <div class="memory-card" onclick="this.classList.toggle('active')">
             <img src="https://i.postimg.cc/9DPJM3PP/486171073-2156441118109991-5940369990250379806-n.jpg">
-            <div class="story-overlay">
-                "We started as social media enemies. I never would have guessed that the girl I argued with would become my everything."
+            <div class="message-box">
+                <div class="message-text">"2016. Mula sa asaran sa social media, hindi ko akalain na ikaw pala ang magiging mundo ko."</div>
             </div>
         </div>
 
-        <div class="memory-tile" onclick="this.classList.toggle('active')">
+        <div class="memory-card" onclick="this.classList.toggle('active')">
             <img src="https://i.postimg.cc/68VY3sVr/487815071-2165701357183967-8851462551105540603-n.jpg">
-            <div class="story-overlay">
-                "I was so shy when we first met. I was stunned by you and didn't know what to say. Thank you for giving me a chance."
+            <div class="message-box">
+                <div class="message-text">"Sobrang torpe ko nung una tayong magkita dahil sa ganda mo. Hindi ko alam kung pano ako magsisimulang kausapin ka."</div>
             </div>
         </div>
 
-        <div class="memory-tile" onclick="this.classList.toggle('active')">
+        <div class="memory-card" onclick="this.classList.toggle('active')">
             <img src="https://i.postimg.cc/5X5n0c5q/489820443-2174539489633487-6011439591898875118-n.jpg">
-            <div class="story-overlay">
-                "1 Year & 7 Months later. This was the moment I finally felt like I was home when I was with you."
+            <div class="message-box">
+                <div class="message-text">"1 Year and 7 Months. Dito ko napatunayan na sa piling mo lang ako naging ganap na masaya."</div>
             </div>
         </div>
 
-        <div class="memory-tile" onclick="this.classList.toggle('active')">
+        <div class="memory-card" onclick="this.classList.toggle('active')">
             <img src="https://i.postimg.cc/751m6v1N/69581500-355412852035744-4306548567939481600-n.jpg">
-            <div class="story-overlay">
-                "Our first blessing. I made mistakes back then, but your forgiveness and love saved our family."
+            <div class="message-box">
+                <div class="message-text">"Salamat sa ating unang blessing. Kahit marami akong pagkakamali noon, pinili mo pa ring manatili."</div>
             </div>
         </div>
 
-        <div class="memory-tile" onclick="this.classList.toggle('active')">
+        <div class="memory-card" onclick="this.classList.toggle('active')">
             <img src="https://i.postimg.cc/LJkNXdkZ/471159072-1105754911104316-9012289369634113099-n.jpg">
-            <div class="story-overlay">
-                "July 29, 2021. Our second blessing arrived. We've had problems, but we never surrendered. We are still here."
+            <div class="message-box">
+                <div class="message-text">"July 2021 hanggang ngayon. Hindi tayo susuko para sa ating mga anak at para sa ating dalawa."</div>
             </div>
         </div>
 
-        <div id="final-apology" class="apology">
-            <h2 style="color: var(--main-pink);">Valentine's Day 2026</h2>
-            <p>I know I’m not perfect. I know I can be immature, and I’m deeply sorry that my attitude is like this today.</p>
-            <p>I'm doing this for the first time because I want to show you I'm trying to be the husband you deserve. Thank you for never giving up on me.</p>
-            <p><b>I love you forever. I am sorry.</b></p>
+        <div class="final-letter">
+            <h2>Patawad, Mahal Ko...</h2>
+            <p>February 14, 2026.</p>
+            <p>Alam kong hindi ako perpektong asawa. Alam kong minsan ay immature ako, at sobrang humihingi ako ng tawad sa attitude ko ngayong araw.</p>
+            <p>Ginawa ko ito dahil gusto kong ipakita na sinusubukan ko. Sinusubukan kong maging asawa na deserve mo. Salamat dahil hindi ka sumusuko sa akin kahit mahirap ako mahalin minsan.</p>
+            <p style="text-align: right; font-family: 'Dancing Script', cursive; font-size: 30px; color: var(--deep-rose); margin-top: 40px;">Mahal na mahal kita, habambuhay.</p>
         </div>
 
-        <p style="margin: 50px 0;">❤️</p>
+        <p style="margin: 60px 0; font-size: 20px; opacity: 0.3;">🌹</p>
     </div>
 </div>
 
 <script>
+    const song = document.getElementById('loveSong');
+
+    function createPetal() {
+        const petal = document.createElement('div');
+        petal.innerHTML = '🌸';
+        petal.classList.add('petal');
+        petal.style.left = Math.random() * 100 + 'vw';
+        petal.style.animationDuration = Math.random() * 4 + 6 + 's';
+        document.body.appendChild(petal);
+        setTimeout(() => petal.remove(), 9000);
+    }
+    setInterval(createPetal, 800);
+
     function unlock() {
         if(document.getElementById('pass').value === '07012016') {
             document.getElementById('login-screen').style.display = 'none';
             document.getElementById('journey').style.display = 'block';
-            setTimeout(() => { document.getElementById('final-apology').classList.add('visible'); }, 1000);
+            
+            // The audio will start here after she interacts with the button
+            song.volume = 0.6;
+            song.play().catch(e => console.log("Audio waiting for user interaction. Click anywhere."));
+            
+            window.scrollTo(0,0);
         } else {
-            alert("Incorrect date. Try again, love.");
+            alert("Mali ang petsa, mahal ko. Subukan ulit.");
         }
     }
 </script>
