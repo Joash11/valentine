@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para Sa Aking Kabiyak</title>
+    <title>Para Sa Aking Babaaaaa</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
     <style>
         :root { --soft-bg: #fffafa; --deep-rose: #a44a4a; --text-muted: #665c5c; }
@@ -21,32 +21,38 @@
         /* Elegant Login */
         #login-screen { height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; }
         .login-card { 
-            background: white; padding: 50px 30px; border-radius: 5px; 
-            box-shadow: 0 15px 40px rgba(0,0,0,0.03); border: 1px solid #eee;
+            background: white; padding: 50px 30px; border-radius: 15px; 
+            box-shadow: 0 15px 40px rgba(0,0,0,0.05); border: 1px solid #f1f1f1;
+            animation: fadeIn 1.5s ease;
         }
         h1 { font-family: 'Dancing Script', cursive; color: var(--deep-rose); font-size: 38px; margin-bottom: 5px; }
         input { 
-            width: 80%; padding: 15px; border: none; border-bottom: 1px solid #ddd;
+            width: 80%; padding: 15px; border: none; border-bottom: 2px solid #eee;
             font-size: 20px; margin: 30px 0; text-align: center; outline: none; background: transparent;
+            transition: 0.3s;
         }
+        input:focus { border-bottom: 2px solid var(--deep-rose); }
         .btn-unlock { 
             background: var(--deep-rose); color: white; border: none; padding: 15px 40px; 
-            cursor: pointer; font-size: 15px; letter-spacing: 2px; text-transform: uppercase; transition: 0.3s;
+            cursor: pointer; font-size: 15px; letter-spacing: 2px; text-transform: uppercase; 
+            border-radius: 50px; transition: 0.4s; box-shadow: 0 5px 15px rgba(164, 74, 74, 0.3);
         }
+        .btn-unlock:hover { transform: scale(1.05); background: #8e3a3a; }
 
         /* Journey Header */
         #journey { display: none; text-align: center; padding-top: 40px; animation: fadeIn 2s ease; }
         .main-title { font-family: 'Dancing Script', cursive; font-size: 45px; color: var(--deep-rose); }
         .subtitle { font-style: italic; font-size: 18px; color: var(--text-muted); margin-bottom: 50px; }
 
-        /* Polaroids / Memory Cards */
+        /* Memory Cards */
         .memory-card { 
-            background: white; padding: 15px 15px 40px 15px; border-radius: 2px; margin-bottom: 60px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #efefef;
-            transition: 0.4s; cursor: pointer; transform: rotate(-1deg);
+            background: white; padding: 15px 15px 45px 15px; border-radius: 2px; margin-bottom: 60px;
+            box-shadow: 0 10px 35px rgba(0,0,0,0.06); border: 1px solid #f9f9f9;
+            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer; transform: rotate(-1.5deg);
         }
-        .memory-card:nth-child(even) { transform: rotate(1.5deg); }
-        .memory-card img { width: 100%; display: block; filter: sepia(10%); }
+        .memory-card:nth-child(even) { transform: rotate(2deg); }
+        .memory-card:hover { transform: rotate(0deg) scale(1.02); }
+        .memory-card img { width: 100%; display: block; border-radius: 2px; }
         
         .message-box { 
             max-height: 0; opacity: 0; overflow: hidden; transition: all 0.8s ease;
@@ -56,14 +62,14 @@
             max-height: 400px; opacity: 1; padding-top: 25px; 
         }
         .message-text { 
-            font-size: 18px; line-height: 1.8; color: #555; font-style: italic;
-            border-top: 1px solid #f5f5f5; padding-top: 20px;
+            font-size: 19px; line-height: 1.8; color: #555; font-style: italic;
+            border-top: 1px solid #fdf2f2; padding-top: 20px;
         }
 
-        /* Handwritten Letter */
+        /* Final Sincere Letter */
         .final-letter { 
-            text-align: left; padding: 50px 20px; margin-top: 30px;
-            border-top: 1px double #ddd;
+            text-align: left; padding: 50px 25px; margin-top: 30px;
+            border-top: 1px double #ddd; background: rgba(255,255,255,0.4); border-radius: 10px;
         }
         .final-letter h2 { font-family: 'Dancing Script', cursive; color: var(--deep-rose); font-size: 35px; }
         .final-letter p { line-height: 2; font-size: 19px; color: #444; }
@@ -72,13 +78,13 @@
         .petal { position: fixed; top: -10%; color: #ffccd5; user-select: none; z-index: 1; pointer-events: none; animation: fall linear infinite; opacity: 0.6; }
         @keyframes fall { to { transform: translateY(110vh) rotate(360deg); opacity: 0; } }
 
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
-<audio id="loveSong" loop>
-    <source src="https://cdn.pixabay.com/audio/2022/05/27/audio_1808f3030e.mp3" type="audio/mpeg">
+<audio id="loveSong" loop preload="auto">
+    <source src="https://www.mboxdrive.com/PanoPiano.mp3" type="audio/mpeg">
 </audio>
 
 <div class="container">
@@ -96,56 +102,56 @@
         <p class="subtitle">Ito ang kwento nating dalawa...</p>
 
         <div class="memory-card" onclick="this.classList.toggle('active')">
-            <img src="https://i.postimg.cc/SKXw7jVq/1.jpg">
+            <img src="https://i.postimg.cc/SKXw7jVq/1.jpg" alt="Family Photo">
             <div class="message-box">
-                <div class="message-text">"Mahal, ito ang pangarap ko... ang bumalik tayo sa dati. 'Yung okay lang tayo, 'yung walang issues. Miss ko na ang kapayapaan nating dalawa. :)"</div>
+                <div class="message-text">"Babaaaaa, ito ang pangarap ko... ang bumalik tayo sa dati. 'Yung okay lang tayo, 'yung walang issues. Miss ko na ang kapayapaan nating dalawa. :)"</div>
             </div>
         </div>
 
         <div class="memory-card" onclick="this.classList.toggle('active')">
-            <img src="https://i.postimg.cc/9DPJM3PP/486171073-2156441118109991-5940369990250379806-n.jpg">
+            <img src="https://i.postimg.cc/9DPJM3PP/486171073-2156441118109991-5940369990250379806-n.jpg" alt="2016">
             <div class="message-box">
                 <div class="message-text">"2016. Mula sa asaran sa social media, hindi ko akalain na ikaw pala ang magiging mundo ko."</div>
             </div>
         </div>
 
         <div class="memory-card" onclick="this.classList.toggle('active')">
-            <img src="https://i.postimg.cc/68VY3sVr/487815071-2165701357183967-8851462551105540603-n.jpg">
+            <img src="https://i.postimg.cc/68VY3sVr/487815071-2165701357183967-8851462551105540603-n.jpg" alt="First Meeting">
             <div class="message-box">
                 <div class="message-text">"Sobrang torpe ko nung una tayong magkita dahil sa ganda mo. Hindi ko alam kung pano ako magsisimulang kausapin ka."</div>
             </div>
         </div>
 
         <div class="memory-card" onclick="this.classList.toggle('active')">
-            <img src="https://i.postimg.cc/5X5n0c5q/489820443-2174539489633487-6011439591898875118-n.jpg">
+            <img src="https://i.postimg.cc/5X5n0c5q/489820443-2174539489633487-6011439591898875118-n.jpg" alt="1 Year 7 Months">
             <div class="message-box">
                 <div class="message-text">"1 Year and 7 Months. Dito ko napatunayan na sa piling mo lang ako naging ganap na masaya."</div>
             </div>
         </div>
 
         <div class="memory-card" onclick="this.classList.toggle('active')">
-            <img src="https://i.postimg.cc/751m6v1N/69581500-355412852035744-4306548567939481600-n.jpg">
+            <img src="https://i.postimg.cc/751m6v1N/69581500-355412852035744-4306548567939481600-n.jpg" alt="First Blessing">
             <div class="message-box">
                 <div class="message-text">"Salamat sa ating unang blessing. Kahit marami akong pagkakamali noon, pinili mo pa ring manatili."</div>
             </div>
         </div>
 
         <div class="memory-card" onclick="this.classList.toggle('active')">
-            <img src="https://i.postimg.cc/LJkNXdkZ/471159072-1105754911104316-9012289369634113099-n.jpg">
+            <img src="https://i.postimg.cc/LJkNXdkZ/471159072-1105754911104316-9012289369634113099-n.jpg" alt="Second Blessing">
             <div class="message-box">
                 <div class="message-text">"July 2021 hanggang ngayon. Hindi tayo susuko para sa ating mga anak at para sa ating dalawa."</div>
             </div>
         </div>
 
         <div class="final-letter">
-            <h2>Patawad, Mahal Ko...</h2>
+            <h2>Patawad, Babaaaaa ko...</h2>
             <p>February 14, 2026.</p>
             <p>Alam kong hindi ako perpektong asawa. Alam kong minsan ay immature ako, at sobrang humihingi ako ng tawad sa attitude ko ngayong araw.</p>
             <p>Ginawa ko ito dahil gusto kong ipakita na sinusubukan ko. Sinusubukan kong maging asawa na deserve mo. Salamat dahil hindi ka sumusuko sa akin kahit mahirap ako mahalin minsan.</p>
             <p style="text-align: right; font-family: 'Dancing Script', cursive; font-size: 30px; color: var(--deep-rose); margin-top: 40px;">Mahal na mahal kita, habambuhay.</p>
         </div>
 
-        <p style="margin: 60px 0; font-size: 20px; opacity: 0.3;">🌹</p>
+        <p style="margin: 60px 0; font-size: 25px; opacity: 0.4;">🌹</p>
     </div>
 </div>
 
@@ -164,17 +170,21 @@
     setInterval(createPetal, 800);
 
     function unlock() {
-        if(document.getElementById('pass').value === '07012016') {
+        const input = document.getElementById('pass').value;
+        if(input === '07012016') {
             document.getElementById('login-screen').style.display = 'none';
             document.getElementById('journey').style.display = 'block';
             
-            // The audio will start here after she interacts with the button
-            song.volume = 0.6;
-            song.play().catch(e => console.log("Audio waiting for user interaction. Click anywhere."));
+            // Audio trigger
+            song.volume = 0.5;
+            song.play().catch(e => {
+                console.log("Auto-play prevented. Playing on next tap.");
+                document.addEventListener('click', () => { song.play(); }, { once: true });
+            });
             
             window.scrollTo(0,0);
         } else {
-            alert("Mali ang petsa, mahal ko. Subukan ulit.");
+            alert("Mali ang petsa, Babaaaaa. Subukan ulit.");
         }
     }
 </script>
